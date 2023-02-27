@@ -1,0 +1,5 @@
+---
+- name: configure http/ftp proxy
+  include: http_proxy.yml
+  tags:
+    - http_proxy
