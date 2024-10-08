@@ -1,5 +1,7 @@
 ---
 - name: Configure http/ftp proxy
-  ansible.builtin.include_tasks: http_proxy.yml
-  tags:
-    - http_proxy
+  ansible.builtin.include_tasks:
+    file: http_proxy.yml
+    apply:
+      tags: [http_proxy]
+  tags: http_proxy
