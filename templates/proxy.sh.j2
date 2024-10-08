@@ -15,15 +15,19 @@ export http_proxy="{{ proxy.http }}"
 export HTTP_PROXY="{{ proxy.http }}"
 {% endif %}
 {% if proxy.https is defined %}
+export https_proxy="{{ proxy.https }}"
 export HTTPS_PROXY="{{ proxy.https }}"
 {% endif %}
 {% if proxy.ftp is defined %}
+export ftp_proxy="{{ proxy.ftp }}"
 export FTP_PROXY="{{ proxy.ftp }}"
 {% endif %}
 {% if proxy.ftps is defined %}
+export ftps_proxy="{{ proxy.ftps }}"
 export FTPS_PROXY="{{ proxy.ftps }}"
 {% endif %}
 {% if proxy.dont_use_for is defined %}
+export no_proxy="{{ proxy.dont_use_for | join(', ') }}"
 export NO_PROXY="{{ proxy.dont_use_for | join(', ') }}"
 {% endif %}
 
