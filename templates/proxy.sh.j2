@@ -3,27 +3,31 @@
 # {{ ansible_managed }}
 
 {% if proxy is defined %}
-# http_proxy is for curl. Manual https://curl.se/docs/manpage.html#ENVIRONMENT
-# says "The environment variables can be specified in lower case or
-# upper case. The lower case version has precedence. http_proxy is an
-# exception as it is only available in lower case."
-
-# HTTP_PROXY is for any other programs.
+# curl is using all PROXY with uppercase, except of http_proxy:
+#   https://curl.se/docs/manpage.html#ENVIRONMENT
+# wget is using lower case:
+#   https://www.gnu.org/software/wget/manual/wget.html#Proxies
+#
+# Letter case for PROXY setting isn't stanartized.
 
 {% if proxy.http is defined %}
 export http_proxy="{{ proxy.http }}"
 export HTTP_PROXY="{{ proxy.http }}"
 {% endif %}
 {% if proxy.https is defined %}
+export https_proxy="{{ proxy.https }}"
 export HTTPS_PROXY="{{ proxy.https }}"
 {% endif %}
 {% if proxy.ftp is defined %}
+export ftp_proxy="{{ proxy.ftp }}"
 export FTP_PROXY="{{ proxy.ftp }}"
 {% endif %}
 {% if proxy.ftps is defined %}
+export ftps_proxy="{{ proxy.ftps }}"
 export FTPS_PROXY="{{ proxy.ftps }}"
 {% endif %}
 {% if proxy.dont_use_for is defined %}
+export no_proxy="{{ proxy.dont_use_for | join(', ') }}"
 export NO_PROXY="{{ proxy.dont_use_for | join(', ') }}"
 {% endif %}
 
